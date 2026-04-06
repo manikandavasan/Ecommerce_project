@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/search_product.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="row shop-featured-product">
+  <div class="col-12 featured-products">
+    {% for product in results %}
+      <div class="featured-product-box">
+        <img src="{{ product.image.url }}" alt="Image" height="250px" width="100%">
+        <h3>{{ product.name }}</h3>
+        <h5>{{ product.price }}</h5>
+        <div>
+          <button class="btn bg-primary"><a href="{% url 'add_to_cart' product.id %}" class="text-decoration-none text-white">Add to Cart</a></button>
+          <button class="btn bg-secondary"><a href="{% url 'product_detail' product.id %}" class="text-decoration-none text-white">View Detail</a></button>
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

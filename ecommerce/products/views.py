@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Product, Category
+from .models import *
+from django.db.models import Q
 # Create your views here.
 
 def product_detail(request, id):
@@ -13,3 +14,15 @@ def product_category_list(request, id):
     category_name =  get_object_or_404(Category, id=id)
     products = Product.objects.filter(category_id=id)
     return render(request, 'product_category_list.html', {'products':products, 'category_name': category_name})
+
+def search_view(request):
+    query = request.GET.get('q')
+    print(query)
+    results = []
+    if query:
+        results = Product.objects.filter(
+            Q(name__icontains=query) | Q(description__icontains=query)
+        )
+        print(results)
+        print(query)
+    return render(request, 'search_results.html', {'results': results, 'query': query})

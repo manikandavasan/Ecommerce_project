@@ -56,4 +56,3 @@ def signin(request):
         else:
             return render(request, 'signin.html', {'erroe': "Invalid credentials"})
     return render(request, 'signin.html')
-        
