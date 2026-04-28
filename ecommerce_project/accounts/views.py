@@ -12,7 +12,7 @@ from rest_framework.permissions import AllowAny
 from django.views.decorators.csrf import ensure_csrf_cookie
 
 
-@api_view(['POST', 'OPTIONS'])
+@api_view(['POST'])
 @permission_classes([AllowAny])
 def signup_api(request):
     try:
@@ -45,7 +45,7 @@ def signup_api(request):
         return Response({'error': str(e)}, status=500)
 
 
-@api_view(['POST','OPTIONS'])
+@api_view(['POST'])
 @permission_classes([AllowAny])
 def signin_api(request):
     username = request.data.get('username')

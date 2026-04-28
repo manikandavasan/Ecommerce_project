@@ -88,8 +88,6 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     "https://ecommerce-project-frontend-ajrz.onrender.com",
 ]
-CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOW_CREDENTIALS = True
 
 # CSRF_TRUSTED_ORIGINS = [
 #     "http://localhost:5173",
