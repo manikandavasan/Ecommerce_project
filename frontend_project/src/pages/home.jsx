@@ -147,9 +147,9 @@ export default function Home() {
                       <p>{product.description}</p>
                       <h2>${product.price}</h2>
 
-                      <a href={`/products/product/media/${product.id}`} className="btn btn-primary m-5">
+                      <Link to={`/product/${product.id}`} className="btn btn-primary m-5">
                         Shop Now
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -191,6 +191,7 @@ export default function Home() {
           categories.map((cat) => (
             <Link key={cat.id} to={`/category/${cat.id}/`}>
           <div className="card category-small-box" key={cat.id}>
+            <h5>{cat.id}</h5>
             <img
                 src={`media/${cat.image}`}
                 alt={cat.name} className="category-image"
