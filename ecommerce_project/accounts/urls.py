@@ -6,4 +6,5 @@ urlpatterns = [
     path('signup/', signup_api, name='signup'),
     path('home/', home_api, name='home'),
     path('signin/', signin_api, name='signin'),
+    path('debug-db/', debug_db),
 ]
