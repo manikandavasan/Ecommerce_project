@@ -189,7 +189,7 @@ export default function Home() {
     <div className="category-wrapper">
         {categories.length > 0 ? (
           categories.map((cat) => (
-            <Link key={cat.id} to={`products/category/${cat.id}/`}>
+            <Link key={cat.id} to={`/category/${cat.id}/`}>
           <div className="card category-small-box" key={cat.id}>
             <h5>{cat.id}</h5>
             <img
