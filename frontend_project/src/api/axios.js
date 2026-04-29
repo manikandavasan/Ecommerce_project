@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://ecommerce-project-hm4w.onrender.com/#/"
+  baseURL: "https://ecommerce-project-hm4w.onrender.com/"
 });
 
 // attach token automatically
