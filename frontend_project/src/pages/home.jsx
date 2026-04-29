@@ -135,7 +135,7 @@ export default function Home() {
                   <div
                     className="carousel-bg carousel-image"
                     style={{
-                      backgroundImage: `url(media/${product.image}")`,
+                      backgroundImage: `url(../assets/images/products/${product.image}")`,
                       backgroundSize: "80% 100%",
                       backgroundPosition: "center",
                       height: "650px"
