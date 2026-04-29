@@ -54,7 +54,7 @@ export default function Home() {
   }
 
   return (
-    <div>
+    <div className="overall-container">
       <nav className="navbar navbar-expand-lg p-2">
     <div className="container-fluid">
       <a className="navbar-brand" href="#">

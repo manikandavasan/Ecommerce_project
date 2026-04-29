@@ -249,6 +249,9 @@
 }
 
 @media screen and (max-width:396px) {
+    .overall-container{
+        padding: 15px;
+    }
     .search-bar{
         width: 200px;
     }
