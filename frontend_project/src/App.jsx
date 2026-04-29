@@ -19,7 +19,7 @@ function App() {
 
         {/* Auth */}
         <Route path="/" element={<Signup />} />
-        <Route path="/signin/" element={<Signin />} />
+        <Route path="/#/signin/" element={<Signin />} />
 
         {/* Main Pages */}
         <Route path="/home/" element={<Home />} />
