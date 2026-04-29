@@ -15,7 +15,7 @@ export default function CategoryProducts() {
   }, [id]);
 
   const fetchProducts = async () => {
-    const res = API.get(`/products/category/${id}/`);
+    const res = API.get(`products/category/${id}/`);
     setProducts(res.data.products);
   };
 
