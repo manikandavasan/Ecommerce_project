@@ -27,7 +27,7 @@ export default function Signin() {
 
     localStorage.setItem("access_token", res.data.access);
 
-    navigate(`/accounts/home/`);
+    navigate(`/home/`);
     } catch (err) {
       setMessage(err.response?.data?.error || "Login failed");
     }
