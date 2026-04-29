@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min'
 import "../assets/css/product_category.css"
 import API from "../api/axios.js"
+import { Link } from "react-router-dom";
 
 export default function CategoryProducts() {
   const { id } = useParams();
