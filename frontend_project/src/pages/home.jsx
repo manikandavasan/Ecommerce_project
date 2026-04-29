@@ -189,7 +189,7 @@ export default function Home() {
     <div className="category-wrapper">
         {categories.length > 0 ? (
           categories.map((cat) => (
-            <Link key={cat.id} to={`/products/category/${cat.id}/`}>
+            <Link key={cat.id} to={`/category/${cat.id}/`}>
           <div className="card category-small-box" key={cat.id}>
             <img
                 src={`https://ecommerce-project-hm4w.onrender.com/${cat.image}`}
@@ -221,7 +221,7 @@ export default function Home() {
                 <h5> inr. {product.price}</h5>
         <div>
           <button className="btn bg-primary text-white" onClick={addToCart}>Add to Cart</button>
-          <button className="btn bg-secondary"><a href={`/products/product/${product.id}`} className="text-decoration-none text-white">View Detail</a></button>
+          <Link className="btn bg-secondary text-decoration-none text-white" to={`/products/product/${product.id}`}>View Detail</Link>
         </div>
       </div>
           ))

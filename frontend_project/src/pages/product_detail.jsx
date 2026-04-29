@@ -20,7 +20,7 @@ export default function ProductDetail() {
   }, []);
 
   const fetchProduct = async () => {
-    const res = await API.get(`/products/product/${id}/`, {
+    const res = await API.get(`/product/${id}/`, {
   headers: {
     Authorization: `Bearer ${localStorage.getItem("access")}`
   }
