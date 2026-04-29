@@ -135,7 +135,7 @@ export default function Home() {
                   <div
                     className="carousel-bg carousel-image"
                     style={{
-                      backgroundImage: `url(${product.image}")`,
+                      backgroundImage: `url(media/${product.image}")`,
                       backgroundSize: "80% 100%",
                       backgroundPosition: "center",
                       height: "650px"
@@ -147,7 +147,7 @@ export default function Home() {
                       <p>{product.description}</p>
                       <h2>${product.price}</h2>
 
-                      <a href={`/products/product/${product.id}`} className="btn btn-primary m-5">
+                      <a href={`/products/product/media/${product.id}`} className="btn btn-primary m-5">
                         Shop Now
                       </a>
                     </div>
@@ -192,7 +192,7 @@ export default function Home() {
             <Link key={cat.id} to={`/category/${cat.id}/`}>
           <div className="card category-small-box" key={cat.id}>
             <img
-                src={`${cat.image}`}
+                src={`media/${cat.image}`}
                 alt={cat.name} className="category-image"
               />
             <h6>{cat.name}</h6>
