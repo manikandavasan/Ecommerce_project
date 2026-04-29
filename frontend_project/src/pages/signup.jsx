@@ -23,7 +23,7 @@ export default function Signup() {
   };
 
   const GoSignin = ()=>{
-    navigate("/accounts/signin/")
+    navigate("/signin/")
   }
 
   const handleSubmit = async (e) => {
