@@ -6,6 +6,8 @@ from django.db.models import Q
 from products.models import *
 from rest_framework.permissions import IsAuthenticated
 from .serializers import *
+import cloudinary.uploader
+from .models import *
 
 
 @api_view(['GET'])
@@ -28,18 +30,25 @@ def product_detail_api(request, id):
         'related_products': list(related_products_serializer.data)
     })
 
-@api_view(['GET'])
-def category_products_api(request, id):
-    category = get_object_or_404(Category, id=id)
-    products = Product.objects.filter(category_id=id)
-    category_serializer = ProductSerializer(products, many=True)
-    print("DataProduct", category_serializer.data)
+@api_view(['POST'])
+def add_category(request):
+    name = request.data.get('name')
+    file = request.FILES.get('image')
+
+    if not file:
+        return Response({"error": "Image is required"}, status=400)
+
+    result = cloudinary.uploader.upload(file, folder="categories")
+
+    category = Category.objects.create(
+        name=name,
+        image=result['secure_url']
+    )
 
     return Response({
-        'category': category_serializer.data,
-        'products': list(products.values())
+        "message": "Category created",
+        "image": category.image
     })
-
 
 @api_view(['GET'])
 def search_api(request):
@@ -56,37 +65,49 @@ def search_api(request):
 
 
 
+@api_view(['POST'])
+def add_category(request):
+    name = request.data.get('name')
+    file = request.FILES.get('image')
+
+    result = cloudinary.uploader.upload(
+        file,
+        folder="categories"
+    )
+
+    category = Category.objects.create(
+        name=name,
+        image=result['secure_url']
+    )
+
+    return Response({"message": "Category created"})
 
 
+@api_view(['POST'])
+def add_product(request):
+    name = request.data.get('name')
+    category_id = request.data.get('category')
+    file = request.FILES.get('image')
 
+    if not file:
+        return Response({"error": "Image is required"}, status=400)
 
+    category = Category.objects.get(id=category_id)
 
+    result = cloudinary.uploader.upload(file, folder="products")
 
-# from django.shortcuts import render, redirect, get_object_or_404
-# from .models import *
-# from django.db.models import Q
-# # Create your views here.
+    product = Product.objects.create(
+        name=name,
+        category=category,
+        image=result['secure_url'],
+        description=request.data.get('description'),
+        price=request.data.get('price'),
+        stock=request.data.get('stock'),
+        created_by="admin",
+        updated_by="admin"
+    )
 
-# def product_detail(request, id):
-#     product = get_object_or_404(Product, id=id)
-#     print(product.category_id)
-#     related_products = Product.objects.filter(category_id=product.category_id).exclude(id=product.id)
-#     return render(request, 'product_detail.html', {'product': product, 'related_products':related_products})
-
-# def product_category_list(request, id):
-
-#     category_name =  get_object_or_404(Category, id=id)
-#     products = Product.objects.filter(category_id=id)
-#     return render(request, 'product_category_list.html', {'products':products, 'category_name': category_name})
-
-# def search_view(request):
-#     query = request.GET.get('q')
-#     print(query)
-#     results = []
-#     if query:
-#         results = Product.objects.filter(
-#             Q(name__icontains=query) | Q(description__icontains=query)
-#         )
-#         print(results)
-#         print(query)
-#     return render(request, 'search_results.html', {'results': results, 'query': query})
+    return Response({
+        "message": "Product created",
+        "image": product.image
+    })

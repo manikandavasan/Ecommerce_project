@@ -11,6 +11,8 @@ import MyOrders from "./pages/my_orders.jsx";
 import ProductDetail from "./pages/product_detail.jsx";
 import CategoryProducts from "./pages/product_category.jsx";
 import Search from "./pages/search_result.jsx";
+import AddCategory from "./pages/AddCategory";
+import AddProduct from "./pages/AddProduct";
 
 function App() {
   return (
@@ -34,6 +36,8 @@ function App() {
 
         {/* Search */}
         <Route path="/search/" element={<Search />} />
+        <Route path="/add-category" element={<AddCategory />} />
+        <Route path="/add-product" element={<AddProduct />} />
 
       </Routes>
     </Router>
