@@ -8,4 +8,5 @@ urlpatterns = [
     path('search/', search_api),
     path('add-category/', add_category),
     path('add-product/', add_product),
+    path('categories/', get_categories),
 ]

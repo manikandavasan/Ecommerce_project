@@ -108,3 +108,9 @@ def add_product(request):
         "message": "Product created",
         "image": product.image
     })
+
+
+@api_view(['GET'])
+def get_categories(request):
+    categories = Category.objects.all().values()
+    return Response(categories)
