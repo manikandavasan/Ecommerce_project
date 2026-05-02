@@ -193,7 +193,7 @@ export default function Home() {
           <div className="card category-small-box" key={cat.id}>
             <h5>{cat.id}</h5>
             <img
-                src={`media/${cat.image}`}
+                src={cat.image}
                 alt={cat.name} className="category-image"
               />
             <h6>{cat.name}</h6>
