@@ -4,22 +4,34 @@ import API from "../api/axios.js";
 export default function AddCategory() {
   const [name, setName] = useState("");
   const [file, setFile] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();  // 🔥 IMPORTANT
+  e.preventDefault();
 
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("image", file);
+  if (loading) return; // 🔥 prevent multiple calls
 
-    try {
-      await API.post('products/add-category/',formData);
-      alert("Category Added ✅");
-    } catch (err) {
-      console.error(err);
-      alert("Error ❌");
-    }
-  };
+  setLoading(true);
+
+  const formData = new FormData();
+  formData.append("name", name);
+  formData.append("image", file);
+
+  try {
+    await API.post("add-category/", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data"
+      }
+    });
+
+    alert("Category Added ✅");
+  } catch (err) {
+    console.error(err);
+    alert("Error ❌");
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div>
@@ -42,7 +54,9 @@ export default function AddCategory() {
 
         <br /><br />
 
-        <button type="submit">Submit</button>
+        <button type="submit" disabled={!file || !name}>
+  Submit
+</button>
       </form>
     </div>
   );

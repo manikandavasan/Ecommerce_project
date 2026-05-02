@@ -60,19 +60,17 @@ def search_api(request):
 @api_view(['POST'])
 def add_category(request):
     name = request.data.get('name')
-    file = request.FILES.get('image')
+    image = request.FILES.get('image')  # 🔥 important
 
-    result = cloudinary.uploader.upload(
-        file,
-        folder="categories"
-    )
+    if not image:
+        return Response({"error": "Image required"}, status=400)
 
     category = Category.objects.create(
         name=name,
-        image=result['secure_url']
+        image=image
     )
 
-    return Response({"message": "Category created"})
+    return Response({"message": "Category created"}, status=201)
 
 
 @api_view(['POST'])
