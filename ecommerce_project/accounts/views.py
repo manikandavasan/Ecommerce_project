@@ -88,7 +88,7 @@ from rest_framework.response import Response
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
-def home(request):
+def home_api(request):
     try:
         user = request.user
 
