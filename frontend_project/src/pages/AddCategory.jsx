@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import API from "../api/axios.js";
 
 export default function AddCategory() {
   const [name, setName] = useState("");
@@ -13,10 +13,7 @@ export default function AddCategory() {
     formData.append("image", file);
 
     try {
-      await axios.post(
-        "http://127.0.0.1:8000/add-category/",
-        formData
-      );
+      await API.post('add-category/',formData);
       alert("Category Added ✅");
     } catch (err) {
       console.error(err);
