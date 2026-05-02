@@ -56,21 +56,28 @@ def search_api(request):
     })
 
 
-
 @api_view(['POST'])
 def add_category(request):
-    name = request.data.get('name')
-    image = request.FILES.get('image')  # 🔥 important
+    try:
+        print("REQUEST DATA:", request.data)
+        print("FILES:", request.FILES)
 
-    if not image:
-        return Response({"error": "Image required"}, status=400)
+        name = request.data.get('name')
+        image = request.FILES.get('image')
 
-    category = Category.objects.create(
-        name=name,
-        image=image
-    )
+        if not name or not image:
+            return Response({"error": "Name and image required"}, status=400)
 
-    return Response({"message": "Category created"}, status=201)
+        category = Category.objects.create(
+            name=name,
+            image=image
+        )
+
+        return Response({"message": "Category created"}, status=201)
+
+    except Exception as e:
+        print("ERROR:", str(e))   # 🔥 VERY IMPORTANT
+        return Response({"error": str(e)}, status=500)
 
 
 @api_view(['POST'])
