@@ -18,18 +18,21 @@ export default function Cart() {
   }, []);
 
   const fetchCart = async () => {
+  try {
     const res = await API.get(`/orders/cart/`, {
-  headers: {
-    Authorization: `Bearer ${localStorage.getItem("access")}`
-  }
-});
-  console.log(res.data.cart_items[0].product_name);
-  const datas = res.data.cart_items
-  console.log("Datas", datas);
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("access_token")}`
+      }
+    });
+
+    const datas = res.data.cart_items || [];
     setCartItems(datas);
-    setTotal(res.data.total);
-    console.log("ACtr", cartItems);
-  };
+    setTotal(res.data.total || 0);
+
+  } catch (err) {
+    console.error("Cart Error:", err);
+  }
+};
 
 
   const submitQuantity = async (id, quantity) => {

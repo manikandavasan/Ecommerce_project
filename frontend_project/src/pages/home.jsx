@@ -41,7 +41,7 @@ export default function Home() {
     };
     try {
       const res = await API.post("orders/cart/add/", cartData);
-      navigate(`/orders/cart/`)
+      navigate(`/cart/`)
     } catch (err) {
       console.error(err)
     }
