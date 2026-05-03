@@ -22,26 +22,33 @@ export default function ProductDetail() {
   const fetchProduct = async () => {
     const res = await API.get(`products/product/${id}/`, {
   headers: {
-    Authorization: `Bearer ${localStorage.getItem("access")}`
-  }
+  Authorization: `Bearer ${localStorage.getItem("access_token")}`  
+}
 });
     setProduct(res.data.product);
     setRelated(res.data.related_products);
   };
 
   const addToCart = async (product_id) => {
-    const cartData = {
-      Quantity: Quantity,
-      product_id: product_id
-    };
-    try {
-      const res = await API.post("orders/cart/add/", cartData);
-      setMessage("Added successfully");
-      navigate(`/cart/`)
-    } catch (err) {
-      setMessage(err.response?.data?.error || "Error occurred");
-    }
+  const cartData = {
+    quantity: Quantity,
+    product_id: product_id
+  };
+
+  try {
+    await API.post("orders/cart/add/", cartData, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("access_token")}`
+      }
+    });
+
+    setMessage("Added successfully");
+    navigate(`/cart/`);
+  } catch (err) {
+    console.error(err.response?.data);
+    setMessage("Error occurred");
   }
+};
 
   return (
     <div className="container-fluid product-detail-body">
@@ -68,7 +75,7 @@ export default function ProductDetail() {
             <div className="cart-box">
                 <div className="quantity-input">
                     <label>Quantity:</label>
-                    <input type="number" value={Quantity} onChange={(e) => setQuantity(e.target.value)} />
+                    <input type="number" value={Quantity} onChange={(e) => setQuantity(Number(e.target.value))} />
                 </div>
                 <button className="btn bg-primary text-white" onClick={ ()=> addToCart(product.id)}>Add to Cart</button>
                 <button className="btn bg-secondary text-white">Buy Now</button>
