@@ -19,33 +19,39 @@ export default function Cart() {
 
   const fetchCart = async () => {
   try {
+    setLoading(true);
     const res = await API.get(`/orders/cart/`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("access_token")}`
       }
     });
 
-    const datas = res.data.cart_items || [];
-    setCartItems(datas);
+    setCartItems(res.data.cart_items || []);
     setTotal(res.data.total || 0);
-
   } catch (err) {
     console.error("Cart Error:", err);
+  } finally {
+    setLoading(false);
   }
 };
 
 
   const submitQuantity = async (id, quantity) => {
-    await API.put(`orders/cart/update/${id}/`, 
-  { quantity },
-  {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("access")}`
-    }
-  }
-);
+  try {
+    await API.put(
+      `orders/cart/update/${id}/`,
+      { quantity },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`
+        }
+      }
+    );
     fetchCart();
-  };
+  } catch (err) {
+    console.error("Update error:", err.response?.data);
+  }
+};
   
 
   const deleteItem = async (id) => {
