@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 export default function Cart() {
   const [cartItems, setCartItems] = useState([]);
   const [total, setTotal] = useState(0);
+  const [loading, setLoading] = useState(true);
   const {id} = useParams()
   const navigate = useNavigate()
 
