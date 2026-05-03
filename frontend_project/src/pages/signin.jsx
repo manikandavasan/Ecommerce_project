@@ -22,6 +22,9 @@ export default function Signin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const [loading, setLoading] = useState(false);
+    setLoading(true);
+
     try {
       const res = await API.post("accounts/signin/", form);
 

@@ -220,7 +220,7 @@ export default function Home() {
                 <h6>{ product.name }</h6>
                 <h5> &#8377; {product.price}</h5>
         <div>
-          <button className="btn bg-primary text-white" onClick={addToCart}>Add to Cart</button>
+          <button className="btn bg-primary text-white" onClick={addToCart(product.id)}>Add to Cart</button>
           <Link className="btn bg-secondary text-decoration-none text-white" to={`/product/${product.id}`}>View Detail</Link>
         </div>
       </div>
