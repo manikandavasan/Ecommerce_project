@@ -22,17 +22,11 @@ export default function Signup() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const GoSignin = ()=>{
-    navigate("/signin/")
-  }
-
   const handleSubmit = async (e) => {
   e.preventDefault();
 
   try {
     const res = await API.post("/accounts/signup/", form);
-
-    console.log("Signup response:", res.data);
 
     if (res.status === 201) {
       alert("Signup success");
@@ -42,8 +36,6 @@ export default function Signup() {
 
   } 
   catch (error) {
-  console.log("FULL ERROR:", error.response);
-
   alert(
     error.response?.data?.error ||
     JSON.stringify(error.response?.data) ||
@@ -68,7 +60,11 @@ export default function Signup() {
 
         <button type="submit">Register</button>
         <p>{message}</p>
-        <p>already have an account <button className="text-white btn btn-primary p-1" onClick={GoSignin}>Click here</button></p>
+        
+        <div className="signin-root">
+          <p>already have an account</p>
+          <Link to={`/accounts/signin`} className="text-white btn btn-primary p-1">Click here</Link>
+        </div>
       </form>
     </div>
     </div>
