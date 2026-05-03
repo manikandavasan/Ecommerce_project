@@ -8,6 +8,8 @@ import "../assets/css/signin.css"
 
 export default function Signin() {
   const navigate = useNavigate()
+  const [loading, setLoading] = useState(false);
+
   const [form, setForm] = useState({
     username: "",
     password: ""
@@ -22,7 +24,6 @@ export default function Signin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const [loading, setLoading] = useState(false);
     setLoading(true);
 
     try {
@@ -44,7 +45,7 @@ export default function Signin() {
 
         <input type="text" name="username" placeholder="Username" onChange={handleChange} />
         <input type="password" name="password" placeholder="Password" onChange={handleChange} />
-        <button type="submit">Sign in</button>
+        <button type="submit" className="btn btn-primary" disabled={loading}> {loading ? ( <span className="spinner-border spinner-border-sm"></span> ) : ( "Sign In" )} </button>
 
         <p>{message}</p>
       </form>
