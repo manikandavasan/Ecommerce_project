@@ -29,16 +29,6 @@ export default function Signup() {
   const handleSubmit = async (e) => {
   e.preventDefault();
 
-  if (
-  !form.username?.trim() ||
-  !form.email?.trim() ||
-  !form.password?.trim() ||
-  !form.confirm_password?.trim()
-) {
-  alert("All fields are required");
-  return;
-}
-
   try {
     const res = await API.post("/accounts/signup/", form);
 

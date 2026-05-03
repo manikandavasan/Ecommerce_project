@@ -3,7 +3,7 @@
     margin: 0px;
     box-sizing: border-box;
 }
-.container{
+.overall-container{
     overflow-x: hidden;
 }
 .navbar{
@@ -21,7 +21,6 @@
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    /* color: black; */
 }
 .nav-user a p{
     margin: 0px;
@@ -248,6 +247,10 @@
 }
 
 @media screen and (max-width:396px) {
+    .top-header{
+        align-items: center;
+        justify-content: center;
+    }
     .search-bar{
         width: 200px;
     }

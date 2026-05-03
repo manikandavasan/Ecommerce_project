@@ -15,21 +15,23 @@ from django.db import connection
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def product_detail_api(request, id):
-    print("ProductID", id)
     product = get_object_or_404(Product, id=id)
-    product_serializer = ProductSerializer(product)
-    print("Data", product_serializer)
+
+    product_serializer = ProductSerializer(
+        product, context={'request': request}
+    )
 
     related_products = Product.objects.filter(
         category=product.category
     ).exclude(id=product.id)
-    related_products_serializer = ProductSerializer(related_products, many=True)
-    print("product", product_serializer.data)
-    print("related_product", related_products_serializer.data)
+
+    related_products_serializer = ProductSerializer(
+        related_products, many=True, context={'request': request}
+    )
 
     return Response({
         'product': product_serializer.data,
-        'related_products': list(related_products_serializer.data)
+        'related_products': related_products_serializer.data
     })
 
 @api_view(['GET'])
@@ -67,12 +69,11 @@ def add_category(request):
         if not name or not file:
             return Response({"error": "Name and image required"}, status=400)
 
-        # upload to cloudinary
         result = cloudinary.uploader.upload(file, folder="categories")
 
         category = Category.objects.create(
             name=name,
-            image=result['secure_url']  # ✅ store URL
+            image=result['secure_url']
         )
 
         return Response({
@@ -85,7 +86,7 @@ def add_category(request):
         return Response({"error": str(e)}, status=500)
 
     except Exception as e:
-        print("ERROR:", str(e))   # 🔥 VERY IMPORTANT
+        print("ERROR:", str(e))
         return Response({"error": str(e)}, status=500)
 
 
@@ -128,11 +129,9 @@ def get_categories(request):
 @api_view(['DELETE'])
 def reset_database(request):
     try:
-        # delete data
         Product.objects.all().delete()
         Category.objects.all().delete()
 
-        # reset IDs (PostgreSQL)
         with connection.cursor() as cursor:
             cursor.execute("ALTER SEQUENCE products_category_id_seq RESTART WITH 1;")
             cursor.execute("ALTER SEQUENCE products_product_id_seq RESTART WITH 1;")

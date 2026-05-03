@@ -11,6 +11,7 @@
     flex-wrap: wrap;
     align-items: center;
     /* justify-content: center; */
+    padding: 5px;
 }
 .myorder-products{
     padding: 20px;
