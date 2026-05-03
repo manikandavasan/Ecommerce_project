@@ -35,17 +35,23 @@ export default function Home() {
   };
 
     const addToCart = async (product_id) => {
-    const cartData = {
-      Quantity: Quantity,
-      product_id: product_id
-    };
-    try {
-      const res = await API.post("orders/cart/add/", cartData);
-      navigate(`/cart/`)
-    } catch (err) {
-      console.error(err)
-    }
+  const cartData = {
+    quantity: 1,
+    product_id: product_id
+  };
+
+  try {
+    const res = await API.post("orders/cart/add/", cartData, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("access_token")}`
+      }
+    });
+
+    navigate(`/cart/`);
+  } catch (err) {
+    console.error("Add to cart error:", err.response?.data || err.message);
   }
+};
 
   
 

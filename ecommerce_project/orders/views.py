@@ -39,15 +39,15 @@ def get_cart(request):
     print("Data", data)
     return Response({'cart_items': data, 'total': total})
 
+from products.models import Product
+
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def add_to_cart_api(request):
     print("USER:", request.user)
-    print("AUTH:", request.user.is_authenticated)
-    if not request.user.is_authenticated:
-        return Response({'error': 'Login required'}, status=401)
 
     product_id = request.data.get('product_id')
-    quantity = int(request.data.get('Quantity', 1))
+    quantity = int(request.data.get('quantity', 1))  # ✅ fixed
 
     if quantity <= 0:
         return Response({'error': 'Quantity must be greater than 0'}, status=400)
@@ -59,7 +59,7 @@ def add_to_cart_api(request):
     cart_item = CartItem.objects.filter(cart=cart, product=product).first()
 
     if cart_item:
-        cart_item.quantity = quantity
+        cart_item.quantity += quantity
         cart_item.save()
     else:
         CartItem.objects.create(
