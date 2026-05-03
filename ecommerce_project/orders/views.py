@@ -9,37 +9,44 @@ from rest_framework.permissions import IsAuthenticated
 
 
 @api_view(['GET'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def get_cart(request):
-    print("working")
-    print("User ", request.user)
-    cart = Cart.objects.filter(user=request.user).first()
-    print("cart data", cart)
+    try:
+        print("User:", request.user)
+        cart = Cart.objects.filter(user=request.user).first()
+        if not cart:
+            return Response({'cart_items': [], 'total': 0})
+        cart_items = CartItem.objects.filter(cart=cart)
+        data = []
+        total = 0
+        for item in cart_items:
+            try:
+                product = item.product
+                subtotal = product.price * item.quantity
+                total += subtotal
+                image_url = None
+                if product.image:
+                    try:
+                        image_url = product.image.url
+                    except:
+                        image_url = None
+                data.append({
+                    'id': item.id,
+                    'product_name': product.name,
+                    'price': product.price,
+                    'quantity': item.quantity,
+                    'subtotal': subtotal,
+                    'image': image_url
+                })
+            except Exception as e:
+                print("ITEM ERROR:", str(e))
+                continue
+        return Response({'cart_items': data, 'total': total})
+    
+    except Exception as e:
+        print("GET CART ERROR:", str(e))
+        return Response({'error': str(e)}, status=500)
 
-    if not cart:
-        return Response({'cart_items': [], 'total': 0})
-
-    cart_items = CartItem.objects.filter(cart=cart)
-
-    data = []
-    total = 0
-
-    for item in cart_items:
-        subtotal = item.product.price * item.quantity
-        total += subtotal
-
-        data.append({
-        'id': item.id,
-        'product_name': item.product.name,
-        'price': item.product.price,
-        'quantity': item.quantity,
-        'subtotal': subtotal,
-        'image': item.product.image.url if item.product.image else None
-    })
-    print("Data", data)
-    return Response({'cart_items': data, 'total': total})
-
-from products.models import Product
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
