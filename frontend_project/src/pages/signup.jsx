@@ -63,7 +63,7 @@ export default function Signup() {
         
         <div className="signin-root">
           <p>already have an account</p>
-          <Link to={`/accounts/signin/`} className="text-white btn btn-primary p-1">Click here</Link>
+          <Link to={`/signin/`} className="text-white btn btn-primary p-1">Click here</Link>
         </div>
       </form>
     </div>
