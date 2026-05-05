@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import API from "../api/axios.js";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-
+import Carousel from 'react-bootstrap/Carousel';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min'
 import "../assets/css/home.css"
@@ -130,49 +130,16 @@ export default function Home() {
 
       <div className="row">
         <div className="col-12 p-0 slide-show">
-        <div id="carouselExample" className="carousel slide" data-bs-ride="carousel">
-  <div className="carousel-inner">
-    {products.length > 0 ? (
-      products.map((product, index) => (
-        <div
-          key={product.id}
-          className={`carousel-item ${index === 0 ? "active" : ""}`}
-        >
-
-          <div className="carousel-caption d-none d-md-block" style={{ backgroundImage: `url(${product.image})` }}>
-            <h3>{product.name}</h3>
-            <p>{product.description}</p>
-            <h4>₹ {product.price}</h4>
-
-            <Link to={`/product/${product.id}`} className="btn btn-primary">
-              Shop Now
-            </Link>
-          </div>
-        </div>
-      ))
-    ) : (
-      <p>No products found</p>
-    )}
-  </div>
-
-  <button
-    className="carousel-control-prev"
-    type="button"
-    data-bs-target="#carouselExample"
-    data-bs-slide="prev"
-  >
-    <span className="carousel-control-prev-icon"></span>
-  </button>
-
-  <button
-    className="carousel-control-next"
-    type="button"
-    data-bs-target="#carouselExample"
-    data-bs-slide="next"
-  >
-    <span className="carousel-control-next-icon"></span>
-  </button>
-</div>
+          <Carousel>
+            {products.map((product) => (
+              <Carousel.Item key={product.id}>
+                <img className="d-block w-100" src={product.image} />
+                <Carousel.Caption>
+                  <h3>{product.name}</h3>
+                </Carousel.Caption>
+              </Carousel.Item>
+            ))}
+          </Carousel>
         </div>
     </div>
 
