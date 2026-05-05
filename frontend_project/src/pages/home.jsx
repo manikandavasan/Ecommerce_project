@@ -131,58 +131,54 @@ export default function Home() {
       <div className="row">
         <div className="col-12 p-0 slide-show">
         <div id="carouselExample" className="carousel slide" data-bs-ride="carousel">
-          <div className="carousel-inner">
-            {products.length > 0 ? (
-              products.map((product, index) => (
-                <div
-                  key={product.id}
-                  className={`carousel-item ${index === 0 ? "active" : ""}`}
-                >
-                  <div
-                    className="carousel-bg carousel-image"
-                    style={{
-                      backgroundImage: `url(${product.image})`,
-                      backgroundSize: "80% 100%",
-                      backgroundPosition: "center",
-                      height: "650px"
-                    }}
-                  >
-                  <img src={product.image} />
-                    <div className="carousel-content text-center text-white">
-                      <h1>{product.name}</h1>
-                      <p>{product.description}</p>
-                      <h2>&#8377; {product.price}</h2>
+  <div className="carousel-inner">
+    {products.length > 0 ? (
+      products.map((product, index) => (
+        <div
+          key={product.id}
+          className={`carousel-item ${index === 0 ? "active" : ""}`}
+        >
+          <img
+            src={product.image}
+            className="d-block w-100"
+            style={{ height: "500px", objectFit: "cover" }}
+            alt={product.name}
+          />
 
-                      <Link to={`/product/${product.id}`} className="btn btn-primary m-5">
-                        Shop Now
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              ))
-            ) : (
-              <p>No products found</p>
-            )}
+          <div className="carousel-caption d-none d-md-block">
+            <h3>{product.name}</h3>
+            <p>{product.description}</p>
+            <h4>₹ {product.price}</h4>
+
+            <Link to={`/product/${product.id}`} className="btn btn-primary">
+              Shop Now
+            </Link>
           </div>
-
-          <button
-            className="carousel-control-prev"
-            type="button"
-            data-bs-target="#carouselExample"
-            data-bs-slide="prev"
-          >
-            <span className="carousel-control-prev-icon"></span>
-          </button>
-
-          <button
-            className="carousel-control-next"
-            type="button"
-            data-bs-target="#carouselExample"
-            data-bs-slide="next"
-          >
-            <span className="carousel-control-next-icon"></span>
-          </button>
         </div>
+      ))
+    ) : (
+      <p>No products found</p>
+    )}
+  </div>
+
+  <button
+    className="carousel-control-prev"
+    type="button"
+    data-bs-target="#carouselExample"
+    data-bs-slide="prev"
+  >
+    <span className="carousel-control-prev-icon"></span>
+  </button>
+
+  <button
+    className="carousel-control-next"
+    type="button"
+    data-bs-target="#carouselExample"
+    data-bs-slide="next"
+  >
+    <span className="carousel-control-next-icon"></span>
+  </button>
+</div>
         </div>
     </div>
 

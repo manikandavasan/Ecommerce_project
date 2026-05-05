@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.http import JsonResponse
 from rest_framework_simplejwt.tokens import RefreshToken
-# from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.permissions import AllowAny
 from .serializers import *
 from django.views.decorators.csrf import ensure_csrf_cookie
@@ -82,14 +82,6 @@ def signin_api(request):
     else:
         return Response({'error': 'Invalid credentials'}, status=401)
 
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
-
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
-from products.models import Product, Category
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -97,41 +89,25 @@ def home_api(request):
     try:
         user = request.user
 
-        # get data
         products = Product.objects.all()
         categories = Category.objects.all()
 
-        # convert to JSON manually
-        product_data = [
-            {
-                "id": p.id,
-                "name": p.name,
-                "description": p.description,
-                "price": p.price,
-                "image": p.image,   # Cloudinary URL
-                "category": p.category.id
-            }
-            for p in products
-        ]
+        product_serializer = ProductSerializer(
+            products, many=True, context={'request': request}
+        )
 
-        category_data = [
-            {
-                "id": c.id,
-                "name": c.name,
-                "image": c.image   # Cloudinary URL
-            }
-            for c in categories
-        ]
+        category_serializer = CategorySerializer(
+            categories, many=True, context={'request': request}
+        )
 
         return Response({
             "message": "Welcome",
             "username": user.username,
-            "products": product_data,
-            "categories": category_data
+            "products": product_serializer.data,
+            "categories": category_serializer.data
         })
 
     except Exception as e:
-        print("HOME ERROR:", str(e))
         return Response({"error": str(e)}, status=500)
 
 
@@ -144,3 +120,6 @@ def debug_db(request):
         "category_count": Category.objects.count(),
         "products": list(Product.objects.all().values())
     })
+
+
+

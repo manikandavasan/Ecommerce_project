@@ -77,7 +77,6 @@ export default function Cart() {
     navigate(-1);
   };
 
-  // ✅ Loading UI
   if (loading) {
     return <h2 style={{ textAlign: "center" }}>Loading cart...</h2>;
   }
