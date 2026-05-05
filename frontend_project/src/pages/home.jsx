@@ -138,14 +138,8 @@ export default function Home() {
           key={product.id}
           className={`carousel-item ${index === 0 ? "active" : ""}`}
         >
-          <img
-            src={product.image}
-            className="d-block w-100"
-            style={{ height: "500px", objectFit: "cover" }}
-            alt={product.name}
-          />
 
-          <div className="carousel-caption d-none d-md-block">
+          <div className="carousel-caption d-none d-md-block" style={{ backgroundImage: `url(${product.image})` }}>
             <h3>{product.name}</h3>
             <p>{product.description}</p>
             <h4>₹ {product.price}</h4>
