@@ -38,12 +38,13 @@ def product_detail_api(request, id):
 def category_products_api(request, id):
     category = get_object_or_404(Category, id=id)
     products = Product.objects.filter(category_id=id)
-    category_serializer = ProductSerializer(products, many=True)
-    print("DataProduct", category_serializer.data)
+
+    product_serializer = ProductSerializer(products, many=True, context={'request': request})
+    category_serializer = CategorySerializer(category, context={'request': request})
 
     return Response({
         'category': category_serializer.data,
-        'products': list(products.values())
+        'products': product_serializer.data
     })
 
 @api_view(['GET'])
