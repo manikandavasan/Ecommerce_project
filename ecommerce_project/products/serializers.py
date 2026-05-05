@@ -4,15 +4,17 @@ from .models import *
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    image = serializers.ImageField(use_url=True)
+    image = serializers.URLField()
 
     class Meta:
         model = Product
         fields = '__all__'
 
+
 class CategorySerializer(serializers.ModelSerializer):
-    image = serializers.ImageField(use_url=True)
+    image = serializers.URLField()
 
     class Meta:
         model = Category
         fields = '__all__'
+
