@@ -256,8 +256,9 @@
         width: 200px;
     }
     .caurosel-image{
-        background-size: 100% 100%;
-        height: 350px;
+        background-size: cover;
+        height: 500px;
+        background-position: center;
     }
     .home-category h2{
         font-size: 18px;
