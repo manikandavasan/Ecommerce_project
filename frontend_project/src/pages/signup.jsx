@@ -61,7 +61,7 @@ export default function Signup() {
         <input type="password" name="password" placeholder="Password" onChange={handleChange} />
         <input type="password" name="confirm_password" placeholder="Confirm Password" onChange={handleChange} />
 
-        <button type="submit">Register</button>
+        <button type="submit" className="btn btn-primary" disabled={loading}> {loading ? ( <span className="spinner-border spinner-border-sm"></span> ) : ( "Register" )} </button>
         <p>{message}</p>
         
         <div className="signin-root">
