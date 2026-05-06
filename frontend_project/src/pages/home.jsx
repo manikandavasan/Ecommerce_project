@@ -130,21 +130,17 @@ export default function Home() {
       </div>
 
       <div className="row">
-        <div className="col-12 p-0 slide-show">
+        <div className="col-12 p-0 slide-show carousel-home-page">
           <Carousel>
           { products.length > 0 ? (
             products.map((product) => (
             <Carousel.Item key={product.id}>
-              <div style={{
-                          backgroundImage: `url(${product.image})`,
-                          height: "500px",
-                          backgroundSize: "cover",
-                          backgroundPosition: "center"
-                        }}>
+              <div style={{ backgroundImage: `url(${product.image})`}} className="caurosel-image">
                 <Carousel.Caption>
-                  <h3>{ product.name }</h3>
-                  <p>{ product.description }</p>
+                  <h5>{ product.name }</h5>
+                  <h2>{ product.description }</h2>
                   <h5> &#8377; { product.price }</h5>
+                  <Link className="btn bg-secondary text-decoration-none text-white" to={`/product/${product.id}`}>Shop Now</Link>
                 </Carousel.Caption>
               </div>
             </Carousel.Item>
