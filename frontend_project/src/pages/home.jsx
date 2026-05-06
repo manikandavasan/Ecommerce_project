@@ -135,7 +135,13 @@ export default function Home() {
           { products.length > 0 ? (
             products.map((product) => (
             <Carousel.Item key={product.id}>
-              <div style={{ backgroundImage: `url(${product.image})` }}>
+              <div style={{
+                          backgroundImage: `url(${product.image})`,
+                          height: "500px",
+                          backgroundSize: "80% 100%",
+                          backgroundPosition: "center",
+                          backgroundRepeat: "no-repeat"
+                        }}>
                 <Carousel.Caption>
                   <h5>{ product.name }</h5>
                   <h2>{ product.description }</h2>
