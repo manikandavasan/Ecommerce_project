@@ -43,3 +43,10 @@
     text-decoration: none;
     list-style-type: none;
 }
+
+@media screen and (max-width:396px) {
+    .shop-myorder-product{
+        justify-content: center;
+    }
+}
+
