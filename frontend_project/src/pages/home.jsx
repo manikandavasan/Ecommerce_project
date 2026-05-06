@@ -130,12 +130,12 @@ export default function Home() {
       </div>
 
       <div className="row">
-        <div className="col-12 p-0 slide-show carousel-home-page">
+        <div className="col-12 p-0 slide-show">
           <Carousel>
           { products.length > 0 ? (
             products.map((product) => (
             <Carousel.Item key={product.id}>
-              <div style={{ backgroundImage: `url(${product.image})`}} className="caurosel-image">
+              <div style={{ backgroundImage: `url(${product.image})` }}>
                 <Carousel.Caption>
                   <h5>{ product.name }</h5>
                   <h2>{ product.description }</h2>

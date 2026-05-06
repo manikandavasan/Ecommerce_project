@@ -83,6 +83,7 @@
     background-size: 70% 100%;
     background-position: center;
     height: 650px;
+    background-repeat: no-repeat;
 }
 .carousel-content{
     position: relative;
