@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 import API from "../api/axios.js";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import Carousel from 'react-bootstrap/Carousel';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min'
 import "../assets/css/home.css"
+import Carousel from 'react-bootstrap/Carousel';
+
 
 export default function Home() {
   const navigate = useNavigate()
