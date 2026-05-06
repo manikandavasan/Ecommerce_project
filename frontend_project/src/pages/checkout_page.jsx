@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import API from "../api/axios.js";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min'
@@ -8,6 +9,7 @@ import "../assets/css/checkout_page.css"
 export default function Checkout() {
   const [cartItems, setCartItems] = useState([]);
   const [total, setTotal] = useState(0);
+  const navigate = useNavigate()
 
   useEffect(() => {
     fetchCart();
@@ -33,6 +35,8 @@ export default function Checkout() {
     }
   }
 );
+navigate(`/myorders/`)
+  nav
   }
 
   return (
