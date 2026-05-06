@@ -7,6 +7,7 @@ import "../assets/css/signup.css"
 
 export default function Signup() {
   const navigate = useNavigate()
+  const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     username: "",
     first_name: "",
@@ -24,6 +25,8 @@ export default function Signup() {
 
   const handleSubmit = async (e) => {
   e.preventDefault();
+
+  setLoading(true)
 
   try {
     const res = await API.post("/accounts/signup/", form);
