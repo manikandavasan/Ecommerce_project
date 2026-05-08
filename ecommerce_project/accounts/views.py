@@ -87,27 +87,23 @@ def signin_api(request):
 @permission_classes([IsAuthenticated])
 def home_api(request):
     try:
-        user = request.user
-
         products = Product.objects.all()
         categories = Category.objects.all()
 
         product_serializer = ProductSerializer(
             products, many=True, context={'request': request}
         )
-
         category_serializer = CategorySerializer(
             categories, many=True, context={'request': request}
         )
 
         return Response({
-            "message": "Welcome",
-            "username": user.username,
             "products": product_serializer.data,
             "categories": category_serializer.data
         })
 
     except Exception as e:
+        print("HOME API ERROR:", str(e))
         return Response({"error": str(e)}, status=500)
 
 

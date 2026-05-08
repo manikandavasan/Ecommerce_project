@@ -11,10 +11,10 @@ class ProductSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def get_image(self, obj):
-        request = self.context.get('request')
-        if obj.image:
-            return request.build_absolute_uri(obj.image.url)
-        return None
+        try:
+            return obj.image.url
+        except:
+            return None   # prevents crash
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -25,7 +25,7 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def get_image(self, obj):
-        request = self.context.get('request')
-        if obj.image:
-            return request.build_absolute_uri(obj.image.url)
-        return None
+        try:
+            return obj.image.url
+        except:
+            return None
