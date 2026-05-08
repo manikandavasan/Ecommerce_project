@@ -13,10 +13,9 @@ class ProductSerializer(serializers.ModelSerializer):
     def get_image(self, obj):
         try:
             if obj.image:
-                return obj.image.url   # ✅ NO request.build_absolute_uri
+                return str(obj.image)
             return None
-        except Exception as e:
-            print("IMAGE ERROR:", e)
+        except:
             return None
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -29,8 +28,7 @@ class CategorySerializer(serializers.ModelSerializer):
     def get_image(self, obj):
         try:
             if obj.image:
-                return obj.image.url
+                return str(obj.image)
             return None
-        except Exception as e:
-            print("CATEGORY IMAGE ERROR:", e)
+        except:
             return None
