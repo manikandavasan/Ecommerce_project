@@ -23,7 +23,11 @@ export default function Home() {
 
   const fetchData = async () => {
     try {
-      const res = await API.get(`accounts/home/`)
+      const res = await API.get(`accounts/home/`, {
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem("access_token")}`
+  }
+});
       console.log("API Data:", res.data);
       setProducts(res.data.products || []);
       setCategories(res.data.categories || []);
