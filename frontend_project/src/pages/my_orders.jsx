@@ -12,14 +12,11 @@ export default function MyOrders() {
   }, []);
 
   const fetchOrders = async () => {
-    const res = await API.get("orders/my_orders/",
-      {},
-      {
-        headers: {
-      Authorization: `Bearer ${localStorage.getItem("access")}`
-    }
-      }
-    );
+    const res = await API.get("orders/my_orders/", {
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem("access_token")}`
+  }
+});
     if (!res){
       alert('No Order yet')
     }
@@ -32,8 +29,11 @@ export default function MyOrders() {
 
   <div className="row shop-myorder-product">
     <div className="col-12 myorder-products">
-    {orders.map((order) => (
-        <div key={order.id} className="myorder-product-box">
+          {orders.length === 0 ? (
+            <div className="no-orders">No orders yet 🛒</div>
+          ) : (
+            orders.map((order) => (
+              <div key={order.id} className="myorder-product-box">
           <h3>Order ID: {order.order_id}</h3>
           <p>Total: ₹{order.total}</p>
 
@@ -47,7 +47,8 @@ export default function MyOrders() {
             ))}
           </ul>
         </div>
-      ))}
+            ))
+          )}
     </div>
   </div>
   );

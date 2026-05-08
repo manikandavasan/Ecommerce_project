@@ -1,49 +1,105 @@
-*{
-    padding: 0px;
-    margin: 0px;
+* {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
 }
 
-/* body{
-    background-color: rgb(182, 184, 190);
-    color: rgb(0, 0, 0);
-    overflow-x: hidden;
-} */
-.featured-products{
+.search-page {
+    min-height: 100vh;
+    background: #f5f6fa;
+    padding: 20px;
+}
+
+.search-form {
     display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    /* overflow-x: auto;
-    scroll-behavior: smooth; */
-    padding: 20px;
-    max-width: 100%;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 30px;
 }
 
-.featured-product-box{
-    min-width: 300px; 
-    background-color: #ffffff;
-    padding: 20px;
+.search-form input {
+    width: 60%;
+    max-width: 400px;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: 0.3s;
+}
+
+.search-form input:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 5px rgba(102, 126, 234, 0.5);
+}
+
+.featured-products {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.featured-product-box {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 15px;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
+    transition: 0.3s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.featured-product-box:hover {
+    transform: translateY(-5px);
+}
+
+.featured-product-box img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
     border-radius: 8px;
 }
-/* .featured-products::-webkit-scrollbar{
-    display: none;
-} */
 
-.featured-product-box > div{
+.featured-product-box h5 {
+    font-size: 16px;
+    color: #333;
+}
+
+.featured-product-box h6 {
+    font-size: 18px;
+    color: #667eea;
+}
+
+.featured-product-box > div {
     display: flex;
-    justify-content: space-between;
-    gap: 10px;
+    gap: 8px;
 }
 
-.featured-product-box > div > button{
+.featured-product-box button,
+.featured-product-box a {
     flex: 1;
+    font-size: 13px;
     padding: 8px;
-    font-size: 14px;
+    border-radius: 6px;
+    text-align: center;
+    transition: 0.3s;
 }
-.featured-product-box > div > button> a{
-    text-decoration: none;
-    color: black;
+
+.featured-product-box button:hover,
+.featured-product-box a:hover {
+    transform: scale(1.05);
+}
+
+.no-results {
+    text-align: center;
+    font-size: 18px;
+    color: #666;
+    margin-top: 50px;
+}
+
+@media (max-width: 480px) {
+    .search-form input {
+        width: 100%;
+    }
 }

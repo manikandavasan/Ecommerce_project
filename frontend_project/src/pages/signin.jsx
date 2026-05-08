@@ -34,6 +34,7 @@ export default function Signin() {
     navigate(`/home/`);
     } catch (err) {
       setMessage(err.response?.data?.error || "Login failed");
+      setLoading(false);
     }
   };
 
@@ -43,8 +44,8 @@ export default function Signin() {
       <form onSubmit={handleSubmit} className="signin-form">
         <h2>Login Form</h2>
 
-        <input type="text" name="username" placeholder="Username" onChange={handleChange} />
-        <input type="password" name="password" placeholder="Password" onChange={handleChange} />
+        <input type="text" name="username" placeholder="Username" onChange={handleChange} required />
+        <input type="password" name="password" placeholder="Password" onChange={handleChange} required />
         <button type="submit" className="btn btn-primary" disabled={loading}> {loading ? ( <span className="spinner-border spinner-border-sm"></span> ) : ( "Sign In" )} </button>
 
         <p>{message}</p>

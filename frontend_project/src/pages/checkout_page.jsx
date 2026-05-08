@@ -31,12 +31,11 @@ export default function Checkout() {
   {},   // body (empty)
   {
     headers: {
-      Authorization: `Bearer ${localStorage.getItem("access")}`
+      Authorization: `Bearer ${localStorage.getItem("access_token")}`
     }
   }
 );
 navigate(`/myorders/`)
-  nav
   }
 
   return (

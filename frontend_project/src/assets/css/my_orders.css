@@ -1,52 +1,95 @@
-*{
-    padding: 0px;
-    margin: 0px;
+* {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
 }
-.shop-myorder-product{
-    width: 100%;
-    height: 100vh;
-    background-color: rgb(255, 255, 255);
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    /* justify-content: center; */
-    padding: 5px;
-}
-.myorder-products{
+
+.shop-myorder-product {
+    min-height: 100vh;
+    background: #f5f6fa;
     padding: 20px;
-    display:flex;
+}
+
+.myorder-products {
+    display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    background-color: rgb(172, 170, 170);
-    /* align-items: center; */
     justify-content: center;
 }
-.myorder-product-box{
-    width: 400px;
+
+.myorder-product-box {
+    width: 100%;
+    max-width: 420px;
+    background: #ffffff;
+    border-radius: 12px;
     padding: 20px;
-    background-color: #fff;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
     display: flex;
     flex-direction: column;
-    gap: 10px;
-}
-.myorder-list{
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
+    gap: 12px;
+    transition: 0.3s;
 }
 
-.myorder-list li{
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    text-decoration: none;
-    list-style-type: none;
+.myorder-product-box:hover {
+    transform: translateY(-5px);
 }
 
-@media screen and (max-width:396px) {
-    .shop-myorder-product{
-        justify-content: center;
+.myorder-product-box h3 {
+    font-size: 18px;
+    color: #333;
+}
+
+.myorder-product-box > p {
+    font-weight: bold;
+    color: #667eea;
+}
+
+.myorder-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.myorder-list li {
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    border-left: 4px solid #667eea;
+}
+
+.myorder-list li p {
+    font-size: 14px;
+    color: #333;
+}
+
+.no-orders {
+    text-align: center;
+    font-size: 18px;
+    color: #666;
+    margin-top: 50px;
+}
+
+@media (max-width: 768px) {
+    .myorder-product-box {
+        max-width: 100%;
     }
 }
 
+@media (max-width: 480px) {
+    .myorder-product-box {
+        padding: 15px;
+    }
+
+    .myorder-product-box h3 {
+        font-size: 16px;
+    }
+
+    .myorder-list li p {
+        font-size: 13px;
+    }
+}

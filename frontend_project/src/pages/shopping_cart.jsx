@@ -78,7 +78,9 @@ export default function Cart() {
   };
 
   if (loading) {
-    return <h2 style={{ textAlign: "center" }}>Loading cart...</h2>;
+    return <div className="text-center p-5">
+  <div className="spinner-border"></div>
+</div>
   }
 
   return (
@@ -106,7 +108,7 @@ export default function Cart() {
                       <img
                         src={item.image || "/placeholder.png"}
                         width="80"
-                        alt=""
+                        alt={item.product_name}
                         className="cart-image"
                       />
                       {item.product_name}
@@ -135,7 +137,10 @@ export default function Cart() {
                       <button
                         className="btn btn-primary p-1 m-1"
                         onClick={() =>
-                          submitQuantity(item.id, item.quantity)
+                          submitQuantity(
+                            item.id,
+                            cartItems.find(ci => ci.id === item.id).quantity
+                          )
                         }
                       >
                         Update
@@ -154,8 +159,8 @@ export default function Cart() {
                 ))
               ) : (
                 <tr>
-                  <td colSpan="4" style={{ textAlign: "center" }}>
-                    Cart is empty
+                  <td colSpan="4" className="empty-cart">
+                    🛒 Your cart is empty
                   </td>
                 </tr>
               )}

@@ -17,7 +17,7 @@ export default function ProductDetail() {
 
   useEffect(() => {
     fetchProduct();
-  }, []);
+  }, [id]);
 
   const fetchProduct = async () => {
     const res = await API.get(`products/product/${id}/`, {
@@ -75,8 +75,7 @@ export default function ProductDetail() {
             <div className="cart-box">
                 <div className="quantity-input">
                     <label>Quantity:</label>
-                    <input type="number" value={Quantity} onChange={(e) => setQuantity(Number(e.target.value))} />
-                </div>
+                    <input type="number" min="1" value={Quantity} onChange={(e) => setQuantity(Math.max(1, Number(e.target.value)))} />                </div>
                 <button className="btn bg-primary text-white" onClick={ ()=> addToCart(product.id)}>Add to Cart</button>
                 <button className="btn bg-secondary text-white">Buy Now</button>
             </div>
@@ -89,7 +88,7 @@ export default function ProductDetail() {
         <div className="col related-product">
             {related.map((p) => (
             <div key={p.id} className="related-product-box">
-              <img src={p.image} alt="" width="100%" height="100px" />
+              <img src={p.image} alt={product.name} width="100%" height="100px" />
                     <p>{p.name}</p>
                     <h3>${p.price}</h3>
                 </div>

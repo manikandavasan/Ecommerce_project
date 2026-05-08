@@ -55,9 +55,11 @@ def search_api(request):
         Q(name__icontains=query) | Q(description__icontains=query)
     )
 
+    serializer = ProductSerializer(results, many=True, context={'request': request})
+
     return Response({
         'query': query,
-        'results': list(results.values())
+        'results': serializer.data
     })
 
 
