@@ -25,6 +25,7 @@
 }
 
 .card-list {
+    height: 400px;
     background: #ffffff;
     border-radius: 12px;
     overflow: hidden;

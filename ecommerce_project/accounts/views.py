@@ -109,27 +109,7 @@ def home_api(request):
 
 @api_view(['DELETE'])
 def debug_db(request):
-    from products.models import Product
-
-    Product.objects.filter(
-        name="Men's Slim Fit Casual TShirt",
-        category_id=2
-    ).delete()
-
-    Product.objects.filter(
-        name="Women's Floral Maxi Dress",
-        category_id=2
-    ).delete()
-
-    Product.objects.filter(
-        name="Atomic Habits",
-        category_id=5
-    ).delete()
-
-    Product.objects.filter(
-        name="Samsung 55 4k Samrt TV",
-        category_id=5
-    ).delete()
+    
 
     return Response({
         "message": "Products deleted successfully"
