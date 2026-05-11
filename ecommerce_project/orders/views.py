@@ -6,6 +6,7 @@ from django.db.models import Q
 from orders.models import *
 from rest_framework.permissions import AllowAny
 from rest_framework.permissions import IsAuthenticated
+from .serializers import *
 
 
 @api_view(['GET'])
@@ -24,12 +25,11 @@ def get_cart(request):
                 product = item.product
                 subtotal = product.price * item.quantity
                 total += subtotal
+
                 image_url = None
                 if product.image:
-                    try:
-                        image_url = product.image.url
-                    except:
-                        image_url = None
+                    image_url = request.build_absolute_uri(product.image.url)
+
                 data.append({
                     'id': item.id,
                     'product_name': product.name,

@@ -73,7 +73,7 @@
 }
 
 .carousel-item div {
-    height: 450px !important;
+    height: 500px !important;
     border-radius: 10px;
     overflow: hidden;
 }
@@ -118,7 +118,7 @@
     justify-content: center;
     gap: 10px;
     transition: 0.3s;
-    cursor: pointer;
+    /* cursor: pointer; */
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
@@ -232,6 +232,7 @@
 
     .carousel-item div {
         height: 300px !important;
+        border-radius: 2px;
     }
 }
 

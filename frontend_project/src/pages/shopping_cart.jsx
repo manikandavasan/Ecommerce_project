@@ -16,7 +16,6 @@ export default function Cart() {
     fetchCart();
   }, []);
 
-  // ✅ Fetch Cart
   const fetchCart = async () => {
     try {
       setLoading(true);
@@ -37,7 +36,6 @@ export default function Cart() {
     }
   };
 
-  // ✅ Update Quantity
   const submitQuantity = async (id, quantity) => {
     try {
       await API.put(
@@ -57,7 +55,6 @@ export default function Cart() {
     }
   };
 
-  // ✅ Delete Item
   const deleteItem = async (id) => {
     try {
       await API.delete(`orders/cart/delete/${id}/`, {
@@ -88,7 +85,6 @@ export default function Cart() {
       <h1>Shopping Cart</h1>
 
       <div className="row overall-cart">
-        {/* LEFT SIDE */}
         <div className="col-12 table-wrapper">
           <table className="cart_table">
             <thead>
@@ -106,7 +102,7 @@ export default function Cart() {
                   <tr key={item.id}>
                     <td>
                       <img
-                        src={item.image || "/placeholder.png"}
+                        src={item.image}
                         width="80"
                         alt={item.product_name}
                         className="cart-image"
@@ -123,7 +119,6 @@ export default function Cart() {
                         value={item.quantity}
                         onChange={(e) => {
                           const newQty = Number(e.target.value);
-
                           setCartItems((prev) =>
                             prev.map((ci) =>
                               ci.id === item.id

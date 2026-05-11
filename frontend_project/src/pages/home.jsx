@@ -115,19 +115,17 @@ export default function Home() {
         <div className="col-12 top-header">
           <form className="d-flex" role="search" action={`/products/search/`} method="GET">
               <input className="form-control me-2 search-bar" type="search" placeholder="Search" name="q" aria-label="Search" required/>
-              <button className="btn btn-outline-secondary" type="submit">Search</button>
+              <Link to="/cart" className="btn btn-outline-secondary">Search</Link>
             </form>
             <div className="signin-cart">
               <div className="nav-user">
                 <a href={ `/` }>
                   <i className="fa-solid fa-user"></i>
                 <div className="bg-secondary text-white register-btn">
-                  <p>Sign In</p>
-                  <p>Register</p>
+                  <p>Sign In / Register</p>
                 </div>
                 </a>
               </div>
-          {/* <a href={`/orders/cart/`}><button className="btn bg-secondary text-white"><i className="fa-solid fa-cart-arrow-down"></i> Cart</button></a> */}
           <Link to="/cart" className="btn bg-secondary text-white">Cart</Link>
           </div>
         </div>
@@ -146,7 +144,7 @@ export default function Home() {
                           backgroundPosition: "center",
                           backgroundRepeat: "no-repeat"
                         }}>
-                <Carousel.Caption>
+                <Carousel.Caption className="pt-3">
                   <h5>{ product.name }</h5>
                   <h2>{ product.description }</h2>
                   <h5> &#8377; { product.price }</h5>
@@ -175,10 +173,7 @@ export default function Home() {
           categories.map((cat) => (
             <Link key={cat.id} to={`/category/${cat.id}/`}>
           <div className="card category-small-box" key={cat.id}>
-            <img
-                src={cat.image}
-                alt={cat.name} className="category-image"
-              />
+            <img src={cat.image} alt={cat.name} className="category-image" />
             <h6>{cat.name}</h6>
           </div>
         </Link>
