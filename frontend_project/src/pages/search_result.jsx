@@ -15,9 +15,13 @@ export default function Search() {
 
     setLoading(true);
     try {
-      const res = await API.get(`search/?q=${query}`);
-      setResults(res.data.results);
-    } catch (err) {
+    const res = await API.get(`search/?q=${query}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("access_token")}`
+      }
+    })
+    }
+    catch (err) {
       console.error(err);
     } finally {
       setLoading(false);
