@@ -115,7 +115,7 @@ export default function Home() {
         <div className="col-12 top-header">
           <form className="d-flex" role="search" action={`/products/search/`} method="GET">
               <input className="form-control me-2 search-bar" type="search" placeholder="Search" name="q" aria-label="Search" required/>
-              <Link to="/cart" className="btn btn-outline-secondary">Search</Link>
+              <Link to="/search" className="btn btn-outline-secondary">Search</Link>
             </form>
             <div className="signin-cart">
               <div className="nav-user">
