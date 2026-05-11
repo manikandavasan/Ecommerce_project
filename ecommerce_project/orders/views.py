@@ -24,12 +24,7 @@ def get_cart(request):
                 product = item.product
                 subtotal = product.price * item.quantity
                 total += subtotal
-                image_url = None
-                if product.image:
-                    try:
-                        image_url = product.image.url
-                    except:
-                        image_url = None
+                image_url = str(product.image.url)
                 data.append({
                     'id': item.id,
                     'product_name': product.name,
