@@ -25,7 +25,8 @@ export default function Cart() {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`
         }
       });
-
+      console.log(res.data.cart_items);
+      console.log('image urkl', res.data.cart_items.image);
       setCartItems(res.data.cart_items || []);
       setTotal(res.data.total || 0);
 
