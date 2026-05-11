@@ -15,7 +15,7 @@ const handleSearch = async (e) => {
 
   setLoading(true);
   try {
-    const res = await API.get(`search/?q=${query}`, {
+    const res = await API.get(`products/search/?q=${query}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("access_token")}`
       }
