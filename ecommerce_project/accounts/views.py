@@ -107,14 +107,20 @@ def home_api(request):
         return Response({"error": str(e)}, status=500)
 
 
-@api_view(['GET'])
+@api_view(['DELETE'])
 def debug_db(request):
     from products.models import Product, Category
 
+    data1 = Product.objects.filter(name="Men's Slim Fit Casual TShirt", category=2)
+    data1.delete()
+    data2 = Product.objects.filter(name="Women's Floral Maxi Dress", category=2)
+    data2.delete()
+    data2 = Product.objects.filter(name="Atomic Habits", category=5)
+    data2.delete()
+    data2 = Product.objects.filter(name="Samsung 55 4k Samrt TV", category=5)
+    data2.delete()
     return Response({
-        "product_count": Product.objects.count(),
-        "category_count": Category.objects.count(),
-        "products": list(Product.objects.all().values())
+        "product deleted"
     })
 
 
