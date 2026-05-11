@@ -91,6 +91,8 @@ export default function ProductDetail() {
               <img src={p.image} alt={product.name} width="100%" height="100px" />
                     <p>{p.name}</p>
                     <h3>${p.price}</h3>
+                    <Link className="btn btn-primary p-2 ps-3 pe-3" to={`/product/${p.id}`}>View Detail</Link>
+
                 </div>
         ))}
         </div>

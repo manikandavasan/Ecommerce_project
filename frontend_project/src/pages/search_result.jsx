@@ -9,24 +9,24 @@ export default function Search() {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const handleSearch = async (e) => {
-    e.preventDefault();
-    if (!query.trim()) return;
+const handleSearch = async (e) => {
+  e.preventDefault();
+  if (!query.trim()) return;
 
-    setLoading(true);
-    try {
+  setLoading(true);
+  try {
     const res = await API.get(`search/?q=${query}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("access_token")}`
       }
-    })
-    }
-    catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
+    });
+    setResults(res.data.results);
+  } catch (err) {
+    console.error(err);
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="search-page">
@@ -40,7 +40,9 @@ export default function Search() {
         />
         <button className="btn btn-primary">Search</button>
       </form>
-
+      {!loading && query && results.length === 0 ? (
+    <div className="no-results">No products found 😕</div>
+    ) : null}
       {loading ? (
         <div className="text-center p-5">
           <div className="spinner-border"></div>

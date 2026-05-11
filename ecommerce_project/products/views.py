@@ -51,11 +51,16 @@ def category_products_api(request, id):
 def search_api(request):
     query = request.GET.get('q', '')
 
+    if not query:
+        return Response({'results': []})
+
     results = Product.objects.filter(
         Q(name__icontains=query) | Q(description__icontains=query)
     )
 
-    serializer = ProductSerializer(results, many=True, context={'request': request})
+    serializer = ProductSerializer(
+        results, many=True, context={'request': request}
+    )
 
     return Response({
         'query': query,
