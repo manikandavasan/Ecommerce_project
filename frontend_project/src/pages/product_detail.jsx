@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import API from "../api/axios.js";
-import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min'
 import "../assets/css/product_detail.css"

@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import API from "../api/axios.js";
-import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min'
 import "../assets/css/home.css"
@@ -113,7 +111,7 @@ export default function Home() {
 
       <div className="row">
         <div className="col-12 top-header">
-          <form className="d-flex" role="search" action={`/products/search/`} method="GET">
+          <form className="d-flex" role="search" onSubmit={`/products/search/`} method="GET">
               <input className="form-control me-2 search-bar" type="search" placeholder="Search" name="q" aria-label="Search" required/>
               <Link to="/search" className="btn btn-outline-secondary">Search</Link>
             </form>
@@ -122,7 +120,7 @@ export default function Home() {
                 <a href={ `/` }>
                   <i className="fa-solid fa-user"></i>
                 <div className="bg-secondary text-white register-btn">
-                  <p>Sign In / Register</p>
+                  <p className="m-0">Sign In / Register</p>
                 </div>
                 </a>
               </div>
